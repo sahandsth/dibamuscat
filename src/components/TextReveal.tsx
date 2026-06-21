@@ -39,6 +39,7 @@ export function TextReveal({
   }
 
   return (
+<<<<<<< HEAD
     <Tag
       className={`max-w-full ${className}`}
       aria-label={text}
@@ -59,6 +60,27 @@ export function TextReveal({
           {letter === " " ? "\u00A0" : letter}
         </motion.span>
       ))}
+=======
+    <Tag className={className} aria-label={text}>
+      <span className="inline-flex max-w-full flex-wrap">
+        {letters.map((letter, i) => (
+          <motion.span
+            key={`${letter}-${i}`}
+            className="inline-block pb-[0.12em]"
+            style={{ whiteSpace: letter === " " ? "pre" : undefined }}
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{
+              duration: 0.55,
+              delay: delay + i * 0.035,
+              ease: [0.22, 1, 0.36, 1],
+            }}
+          >
+            {letter === " " ? "\u00A0" : letter}
+          </motion.span>
+        ))}
+      </span>
+>>>>>>> a1a4b57288d545ff7f166dc29bf8d3522afdf0a0
     </Tag>
   );
 }

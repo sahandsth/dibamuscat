@@ -131,10 +131,15 @@ body {
 
 .gradient-text {
   display: inline-block;
+<<<<<<< HEAD
   max-width: 100%;
   line-height: 1.25;
   padding-right: 0.1em;
   padding-bottom: 0.22em;
+=======
+  padding-bottom: 0.08em;
+  padding-right: 0.06em;
+>>>>>>> a1a4b57288d545ff7f166dc29bf8d3522afdf0a0
   background: linear-gradient(
     135deg,
     var(--wine) 0%,
