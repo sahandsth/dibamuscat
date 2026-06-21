@@ -4,8 +4,27 @@ import { motion } from "framer-motion";
 import { Calendar, MapPin, Phone, Clock, Camera } from "lucide-react";
 import { AnimatedSection } from "./AnimatedSection";
 import { site } from "@/lib/site";
+import { useLanguage } from "./LanguageProvider";
+
+const detailIcons = [MapPin, Clock, Phone, Camera];
+
+const detailValues = [
+  site.location.short,
+  site.hours,
+  site.phone.display,
+  `@${site.instagram.handle}`,
+];
+
+const detailLinks = [
+  `https://maps.google.com/?q=${site.location.mapsQuery}`,
+  undefined,
+  `tel:${site.phone.tel}`,
+  site.instagram.url,
+];
 
 export function Booking() {
+  const { t } = useLanguage();
+
   return (
     <section id="book" className="relative overflow-hidden px-5 py-20 md:py-28">
       <div className="absolute inset-0 bg-gradient-to-b from-blush/30 to-cream" />
@@ -18,15 +37,15 @@ export function Booking() {
       <div className="relative mx-auto max-w-6xl">
         <AnimatedSection className="text-center">
           <p className="mb-3 text-xs tracking-[0.3em] text-rose uppercase">
-            Ready to Glow?
+            {t.booking.eyebrow}
           </p>
           <h2 className="font-display text-4xl text-wine md:text-6xl">
-            Book Your
+            {t.booking.titleLine1}
             <br />
-            <span className="gradient-text italic">Appointment</span>
+            <span className="gradient-text italic">{t.booking.titleLine2}</span>
           </h2>
           <p className="mx-auto mt-4 max-w-md text-muted">
-            Reserve your spot at Diba — or DM us on{" "}
+            {t.booking.subtitle}{" "}
             <a
               href={site.instagram.url}
               target="_blank"
@@ -60,64 +79,46 @@ export function Booking() {
             </div>
 
             <div className="relative space-y-4 p-6">
-              {[
-                {
-                  icon: MapPin,
-                  label: "Location",
-                  value: site.location.short,
-                  href: `https://maps.google.com/?q=${site.location.mapsQuery}`,
-                },
-                {
-                  icon: Clock,
-                  label: "Hours",
-                  value: site.hours,
-                },
-                {
-                  icon: Phone,
-                  label: "WhatsApp / Call",
-                  value: site.phone.display,
-                  href: `tel:${site.phone.tel}`,
-                },
-                {
-                  icon: Camera,
-                  label: "Instagram",
-                  value: `@${site.instagram.handle}`,
-                  href: site.instagram.url,
-                },
-              ].map((item, i) => (
-                <motion.div
-                  key={item.label}
-                  className="flex items-start gap-4"
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.3 + i * 0.1 }}
-                >
+              {t.booking.details.map((item, i) => {
+                const Icon = detailIcons[i];
+                const value = detailValues[i];
+                const href = detailLinks[i];
+
+                return (
                   <motion.div
-                    className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-blush text-rose"
-                    whileHover={{ rotate: 10, scale: 1.1 }}
+                    key={item.label}
+                    className="flex items-start gap-4"
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.3 + i * 0.1 }}
                   >
-                    <item.icon size={18} strokeWidth={1.5} />
+                    <motion.div
+                      className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-blush text-rose"
+                      whileHover={{ rotate: 10, scale: 1.1 }}
+                    >
+                      <Icon size={18} strokeWidth={1.5} />
+                    </motion.div>
+                    <div>
+                      <p className="text-xs tracking-wider text-muted uppercase">
+                        {item.label}
+                      </p>
+                      {href ? (
+                        <a
+                          href={href}
+                          target={href.startsWith("http") ? "_blank" : undefined}
+                          rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
+                          className="font-medium text-wine transition-colors hover:text-rose"
+                        >
+                          {value}
+                        </a>
+                      ) : (
+                        <p className="font-medium text-wine">{value}</p>
+                      )}
+                    </div>
                   </motion.div>
-                  <div>
-                    <p className="text-xs tracking-wider text-muted uppercase">
-                      {item.label}
-                    </p>
-                    {item.href ? (
-                      <a
-                        href={item.href}
-                        target={item.href.startsWith("http") ? "_blank" : undefined}
-                        rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                        className="font-medium text-wine transition-colors hover:text-rose"
-                      >
-                        {item.value}
-                      </a>
-                    ) : (
-                      <p className="font-medium text-wine">{item.value}</p>
-                    )}
-                  </div>
-                </motion.div>
-              ))}
+                );
+              })}
 
               <motion.a
                 href={`https://wa.me/${site.phone.whatsapp}`}
@@ -128,7 +129,7 @@ export function Booking() {
                 whileTap={{ scale: 0.98 }}
               >
                 <Calendar size={18} />
-                Book via WhatsApp
+                {t.booking.bookWhatsApp}
               </motion.a>
 
               <motion.a
@@ -140,7 +141,7 @@ export function Booking() {
                 whileTap={{ scale: 0.98 }}
               >
                 <Camera size={18} />
-                Follow @{site.instagram.handle}
+                {t.booking.followInstagram} @{site.instagram.handle}
               </motion.a>
 
               <motion.a
@@ -150,7 +151,7 @@ export function Booking() {
                 whileTap={{ scale: 0.98 }}
               >
                 <Phone size={18} />
-                Call {site.phone.display}
+                {t.booking.call} {site.phone.display}
               </motion.a>
             </div>
           </motion.div>

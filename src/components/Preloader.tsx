@@ -3,8 +3,10 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
 import { FloatingParticles } from "./FloatingParticles";
+import { useLanguage } from "./LanguageProvider";
 
 export function Preloader() {
+  const { t } = useLanguage();
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -49,7 +51,7 @@ export function Preloader() {
               animate={{ opacity: 1, letterSpacing: "0.4em" }}
               transition={{ delay: 0.8, duration: 0.8 }}
             >
-              Grand Millennium
+              {t.preloader.tagline}
             </motion.p>
           </motion.div>
 

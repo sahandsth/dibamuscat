@@ -3,26 +3,11 @@
 import { motion } from "framer-motion";
 import { Quote } from "lucide-react";
 import { AnimatedSection, AnimatedItem } from "./AnimatedSection";
-
-const reviews = [
-  {
-    text: "Best lash extensions in Muscat! The team at Diba is incredibly talented and the salon at Grand Millennium feels so luxurious.",
-    name: "Sarah A.",
-    service: "Lash Extensions",
-  },
-  {
-    text: "My nails have never looked this good. The attention to detail is unmatched. Already booked my next visit!",
-    name: "Fatima K.",
-    service: "Nail Art",
-  },
-  {
-    text: "From lashes to pedicure — everything was perfect. Diba at Grand Millennium is my go-to beauty spot in Oman.",
-    name: "Layla M.",
-    service: "Full Glam",
-  },
-];
+import { useLanguage } from "./LanguageProvider";
 
 export function Testimonials() {
+  const { t } = useLanguage();
+
   return (
     <section className="relative overflow-hidden bg-wine px-5 py-20 text-cream md:py-28">
       <motion.div
@@ -33,15 +18,15 @@ export function Testimonials() {
       <div className="relative mx-auto max-w-6xl">
         <AnimatedSection className="mb-12 text-center">
           <p className="mb-3 text-xs tracking-[0.3em] text-rose-light uppercase">
-            Love Notes
+            {t.testimonials.eyebrow}
           </p>
           <h2 className="font-display text-4xl md:text-5xl">
-            What Clients Say
+            {t.testimonials.title}
           </h2>
         </AnimatedSection>
 
         <AnimatedSection stagger className="grid gap-4 md:grid-cols-3 md:gap-6">
-          {reviews.map((review, i) => (
+          {t.testimonials.reviews.map((review, i) => (
             <AnimatedItem key={review.name}>
               <motion.div
                 className="relative overflow-hidden rounded-3xl border border-cream/10 bg-cream/5 p-6 backdrop-blur-sm"

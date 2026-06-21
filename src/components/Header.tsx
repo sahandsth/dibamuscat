@@ -3,17 +3,20 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
-
-const links = [
-  { href: "#services", label: "Services" },
-  { href: "#about", label: "About" },
-  { href: "#gallery", label: "Gallery" },
-  { href: "#book", label: "Book" },
-];
+import { LanguageSwitcher } from "./LanguageSwitcher";
+import { useLanguage } from "./LanguageProvider";
 
 export function Header() {
+  const { t } = useLanguage();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+
+  const links = [
+    { href: "#services", label: t.nav.services },
+    { href: "#about", label: t.nav.about },
+    { href: "#gallery", label: t.nav.gallery },
+    { href: "#book", label: t.nav.book },
+  ];
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -38,7 +41,7 @@ export function Header() {
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
       >
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-5">
+        <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-5">
           <a href="#home" className="group flex flex-col">
             <span className="font-display text-2xl font-semibold tracking-[0.2em] text-wine">
               DIBA
@@ -48,7 +51,7 @@ export function Header() {
             </span>
           </a>
 
-          <nav className="hidden items-center gap-8 md:flex">
+          <nav className="hidden items-center gap-6 md:flex">
             {links.map((link) => (
               <a
                 key={link.href}
@@ -58,22 +61,26 @@ export function Header() {
                 {link.label}
               </a>
             ))}
+            <LanguageSwitcher compact />
             <a
               href="#book"
               className="rounded-full bg-wine px-5 py-2.5 text-sm font-medium text-cream transition-transform hover:scale-105 active:scale-95"
             >
-              Book Now
+              {t.nav.bookNow}
             </a>
           </nav>
 
-          <button
-            type="button"
-            onClick={() => setOpen(!open)}
-            className="flex h-11 w-11 items-center justify-center rounded-full bg-wine/5 text-wine md:hidden"
-            aria-label={open ? "Close menu" : "Open menu"}
-          >
-            {open ? <X size={20} /> : <Menu size={20} />}
-          </button>
+          <div className="flex items-center gap-2 md:hidden">
+            <LanguageSwitcher compact />
+            <button
+              type="button"
+              onClick={() => setOpen(!open)}
+              className="flex h-11 w-11 items-center justify-center rounded-full bg-wine/5 text-wine"
+              aria-label={open ? t.nav.closeMenu : t.nav.openMenu}
+            >
+              {open ? <X size={20} /> : <Menu size={20} />}
+            </button>
+          </div>
         </div>
       </motion.header>
 
@@ -109,7 +116,7 @@ export function Header() {
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.35 }}
               >
-                Book Appointment
+                {t.nav.bookAppointment}
               </motion.a>
             </nav>
           </motion.div>

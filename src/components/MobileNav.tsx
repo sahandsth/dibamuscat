@@ -3,26 +3,30 @@
 import { motion } from "framer-motion";
 import { Calendar, Home, ImageIcon, Sparkles } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
+import { useLanguage } from "./LanguageProvider";
 
-const tabs = [
-  { href: "#home", icon: Home, label: "Home" },
-  { href: "#services", icon: Sparkles, label: "Services" },
-  { href: "#gallery", icon: ImageIcon, label: "Gallery" },
-  { href: "#book", icon: Calendar, label: "Book" },
-] as const;
+const TAB_HREFS = ["#home", "#services", "#gallery", "#book"] as const;
 
 export function MobileNav() {
-  const [active, setActive] = useState<string>(tabs[0].href);
+  const { t } = useLanguage();
+  const tabs = [
+    { href: "#home", icon: Home, label: t.nav.home },
+    { href: "#services", icon: Sparkles, label: t.nav.services },
+    { href: "#gallery", icon: ImageIcon, label: t.nav.gallery },
+    { href: "#book", icon: Calendar, label: t.nav.book },
+  ] as const;
+
+  const [active, setActive] = useState<string>(TAB_HREFS[0]);
 
   const syncActiveFromScroll = useCallback(() => {
     const marker = window.scrollY + window.innerHeight * 0.32;
-    let current: string = tabs[0].href;
+    let current: string = TAB_HREFS[0];
 
-    for (const tab of tabs) {
-      const el = document.querySelector(tab.href);
+    for (const href of TAB_HREFS) {
+      const el = document.querySelector(href);
       if (!el) continue;
       const top = el.getBoundingClientRect().top + window.scrollY;
-      if (marker >= top - 96) current = tab.href;
+      if (marker >= top - 96) current = href;
     }
 
     setActive(current);
@@ -32,7 +36,7 @@ export function MobileNav() {
     const onScroll = () => syncActiveFromScroll();
     const onHashChange = () => {
       const hash = window.location.hash;
-      if (tabs.some((t) => t.href === hash)) setActive(hash);
+      if (TAB_HREFS.some((href) => href === hash)) setActive(hash);
     };
 
     const frame = requestAnimationFrame(onScroll);

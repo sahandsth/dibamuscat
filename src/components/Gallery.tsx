@@ -5,74 +5,18 @@ import Image from "next/image";
 import { useRef, useState } from "react";
 import { AnimatedSection } from "./AnimatedSection";
 import { site } from "@/lib/site";
+import { useLanguage } from "./LanguageProvider";
 
-/** Verified Unsplash URLs (HTTP 200) — matched to each service category */
-const portfolio = [
-  {
-    src: "https://images.unsplash.com/photo-1639629509821-c54cdd984227?w=700&q=80",
-    alt: "Close-up of lash extensions",
-    tag: "Lashes",
-    caption: "Volume & hybrid sets",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1632345031435-8727f6897d53?w=700&q=80",
-    alt: "Nail art and gel manicure",
-    tag: "Nails",
-    caption: "Gel, acrylic & art",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1519699047748-de8e457a634e?w=700&q=80",
-    alt: "Hair styling and blowout",
-    tag: "Hair",
-    caption: "Cuts, colour & blowouts",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1519419451778-14599a49ec41?w=700&q=80",
-    alt: "Pedicure treatment with foot brush at spa",
-    tag: "Pedicure",
-    caption: "Spa pedicure & care",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1512496015851-a90fb38ba796?w=700&q=80",
-    alt: "Brow shaping and makeup",
-    tag: "Brows",
-    caption: "Shape, tint & lamination",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=700&q=80",
-    alt: "Facial and skin glow treatment",
-    tag: "Facial",
-    caption: "Rejuvenating glow",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1522338242992-e1a54906a8da?w=700&q=80",
-    alt: "Keratin and hair smoothing",
-    tag: "Keratin",
-    caption: "Smooth, silky hair",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1519741497674-611481863552?w=700&q=80",
-    alt: "Bridal makeup and glam",
-    tag: "Bridal",
-    caption: "Full bridal glam",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1560066984-138dadb4c035?w=700&q=80",
-    alt: "Diba beauty lounge interior",
-    tag: "The Lounge",
-    caption: "Grand Millennium Muscat",
-  },
-];
-
-const categories = [
-  "Lashes",
-  "Nails",
-  "Hair",
-  "Pedicure",
-  "Brows",
-  "Facial",
-  "Keratin",
-  "Bridal",
+const portfolioImages = [
+  "https://images.unsplash.com/photo-1639629509821-c54cdd984227?w=700&q=80",
+  "https://images.unsplash.com/photo-1632345031435-8727f6897d53?w=700&q=80",
+  "https://images.unsplash.com/photo-1519699047748-de8e457a634e?w=700&q=80",
+  "https://images.unsplash.com/photo-1519419451778-14599a49ec41?w=700&q=80",
+  "https://images.unsplash.com/photo-1512496015851-a90fb38ba796?w=700&q=80",
+  "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=700&q=80",
+  "https://images.unsplash.com/photo-1522338242992-e1a54906a8da?w=700&q=80",
+  "https://images.unsplash.com/photo-1519741497674-611481863552?w=700&q=80",
+  "https://images.unsplash.com/photo-1560066984-138dadb4c035?w=700&q=80",
 ];
 
 function PortfolioImage({
@@ -111,7 +55,7 @@ function PortfolioCard({
   index,
   className = "",
 }: {
-  item: (typeof portfolio)[number];
+  item: { src: string; alt: string; tag: string; caption: string };
   index: number;
   className?: string;
 }) {
@@ -136,27 +80,29 @@ function PortfolioCard({
 }
 
 export function Gallery() {
+  const { t } = useLanguage();
   const scrollRef = useRef<HTMLDivElement>(null);
   const { scrollXProgress } = useScroll({ container: scrollRef });
   const progressWidth = useTransform(scrollXProgress, [0, 1], ["0%", "100%"]);
+
+  const portfolio = t.gallery.portfolio.map((item, index) => ({
+    ...item,
+    src: portfolioImages[index],
+  }));
 
   return (
     <section id="gallery" className="py-20 md:py-28">
       <div className="mx-auto max-w-6xl px-5">
         <AnimatedSection className="mb-6 md:mb-8">
           <p className="mb-3 text-xs tracking-[0.3em] text-rose uppercase">
-            Portfolio
+            {t.gallery.eyebrow}
           </p>
           <h2 className="font-display text-4xl text-wine md:text-5xl">
-            Our Work
+            {t.gallery.title}
           </h2>
-          <p className="mt-4 max-w-lg text-muted">
-            A full-service beauty lounge — lashes, nails, hair, pedicure, brows,
-            facials, keratin, bridal &amp; more, all under one roof at Grand
-            Millennium.
-          </p>
+          <p className="mt-4 max-w-lg text-muted">{t.gallery.subtitle}</p>
           <div className="mt-5 flex flex-wrap gap-2">
-            {categories.map((cat) => (
+            {t.gallery.categories.map((cat) => (
               <span
                 key={cat}
                 className="rounded-full border border-wine/10 bg-white/60 px-3 py-1 text-[11px] tracking-wide text-wine/80 uppercase"
@@ -168,14 +114,12 @@ export function Gallery() {
         </AnimatedSection>
       </div>
 
-      {/* Mobile: full grid so the section feels complete */}
       <div className="grid grid-cols-2 gap-3 px-5 md:hidden">
         {portfolio.map((item, i) => (
           <PortfolioCard key={item.tag} item={item} index={i} />
         ))}
       </div>
 
-      {/* Desktop: horizontal showcase */}
       <div
         ref={scrollRef}
         className="no-scrollbar mt-8 hidden gap-5 overflow-x-auto px-5 pb-2 md:flex md:px-[max(1.25rem,calc((100vw-72rem)/2+1.25rem))]"
@@ -206,7 +150,7 @@ export function Gallery() {
           rel="noopener noreferrer"
           className="inline-flex items-center gap-2 text-sm font-medium text-rose transition-colors hover:text-wine"
         >
-          See more on @{site.instagram.handle} →
+          {t.gallery.seeMore} @{site.instagram.handle} →
         </a>
       </AnimatedSection>
     </section>

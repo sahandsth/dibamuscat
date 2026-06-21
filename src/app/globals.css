@@ -150,6 +150,67 @@ body {
   animation: shimmer 6s linear infinite;
 }
 
+.hero-title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding-bottom: 0.15em;
+  font-family: var(--font-display), serif;
+  font-size: clamp(3.25rem, min(14vw, 18vh), 9rem);
+  font-weight: 500;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+}
+
+.hero-title-line {
+  display: block;
+  overflow: visible;
+  width: 100%;
+  padding-bottom: 0.12em;
+  text-align: center;
+}
+
+.hero-title-accent {
+  color: var(--rose);
+  font-style: italic;
+  text-shadow: 0 0 48px rgba(183, 110, 121, 0.28);
+  animation: hero-accent-shift 6s ease-in-out infinite;
+}
+
+@keyframes hero-accent-shift {
+  0%,
+  100% {
+    color: var(--rose);
+  }
+  50% {
+    color: var(--gold);
+  }
+}
+
+html[dir="rtl"] .hero-title {
+  letter-spacing: 0;
+}
+
+html[dir="rtl"] .hero-title-accent {
+  font-style: normal;
+}
+
+html[data-locale="fa"] {
+  --font-display: var(--font-vazirmatn);
+  --font-body: var(--font-vazirmatn);
+}
+
+html[data-locale="ar"] {
+  --font-display: var(--font-noto-arabic);
+  --font-body: var(--font-noto-arabic);
+}
+
+html[dir="rtl"] .animate-marquee {
+  animation-direction: reverse;
+}
+
 .glass {
   background: rgba(251, 248, 245, 0.72);
   backdrop-filter: blur(20px);

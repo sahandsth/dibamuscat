@@ -1,22 +1,19 @@
 "use client";
 
-const items = [
-  "DIBA",
-  "LASHES",
-  "NAILS",
-  "HAIR",
-  "PEDICURE",
-  "GRAND MILLENNIUM",
-  "GLOW",
-  "BEAUTY",
-];
+import { useLanguage } from "./LanguageProvider";
 
 export function Marquee() {
+  const { t } = useLanguage();
+  const items = t.marquee;
+
   const row = items.map((item) => (
     <span key={item} className="mx-6 flex items-center gap-6">
       <span
         className={`font-display text-3xl tracking-[0.15em] md:text-5xl ${
-          item === "DIBA" || item === "GRAND MILLENNIUM"
+          item === "DIBA" ||
+          item === "دیبا" ||
+          item === "GRAND MILLENNIUM" ||
+          item === "Grand Millennium"
             ? "animate-shimmer bg-gradient-to-r from-wine via-rose to-gold bg-clip-text text-transparent"
             : "text-wine/80"
         }`}
