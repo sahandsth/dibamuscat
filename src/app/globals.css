@@ -131,8 +131,10 @@ body {
 
 .gradient-text {
   display: inline-block;
-  overflow: visible;
-  padding-bottom: 0.08em;
+  max-width: 100%;
+  line-height: 1.25;
+  padding-right: 0.1em;
+  padding-bottom: 0.22em;
   background: linear-gradient(
     135deg,
     var(--wine) 0%,
@@ -143,9 +145,8 @@ body {
   background-size: 200% auto;
   -webkit-background-clip: text;
   background-clip: text;
+  color: transparent;
   -webkit-text-fill-color: transparent;
-  -webkit-box-decoration-break: clone;
-  box-decoration-break: clone;
   animation: shimmer 6s linear infinite;
 }
 
