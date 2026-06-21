@@ -29,18 +29,19 @@ export function MobileNav() {
   }, []);
 
   useEffect(() => {
-    syncActiveFromScroll();
-
     const onScroll = () => syncActiveFromScroll();
     const onHashChange = () => {
       const hash = window.location.hash;
       if (tabs.some((t) => t.href === hash)) setActive(hash);
     };
 
+    const frame = requestAnimationFrame(onScroll);
+
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("hashchange", onHashChange);
 
     return () => {
+      cancelAnimationFrame(frame);
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("hashchange", onHashChange);
     };

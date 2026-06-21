@@ -81,19 +81,11 @@ export function Hero() {
             Grand Millennium · Muscat
           </motion.div>
 
-<<<<<<< HEAD
           <h1 className="max-w-full pb-1 font-display text-[clamp(2.5rem,min(10vw,14vh),6.5rem)] leading-[1.25] font-medium tracking-tight">
             <TextReveal text="Diba" className="block text-wine" delay={0.4} as="span" />
             <TextReveal
               text="Beauty"
               className="gradient-text block italic"
-=======
-          <h1 className="max-w-full font-display text-[clamp(2.5rem,10vw,7rem)] leading-[1.1] font-medium tracking-tight">
-            <TextReveal text="Diba" className="block text-wine" delay={0.4} as="span" />
-            <TextReveal
-              text="Beauty"
-              className="gradient-text block pr-[0.08em] italic"
->>>>>>> a1a4b57288d545ff7f166dc29bf8d3522afdf0a0
               delay={0.7}
               as="span"
               splitLetters={false}
