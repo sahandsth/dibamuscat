@@ -131,8 +131,8 @@ body {
 
 .gradient-text {
   display: inline-block;
-  overflow: visible;
   padding-bottom: 0.08em;
+  padding-right: 0.06em;
   background: linear-gradient(
     135deg,
     var(--wine) 0%,

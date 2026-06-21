@@ -64,8 +64,8 @@ export function Hero() {
         }}
       />
 
-      <motion.div style={{ y, opacity }} className="relative z-10 overflow-visible px-5 pb-28 pt-32 md:pb-36 md:pt-40">
-        <div className="mx-auto max-w-6xl">
+      <motion.div style={{ y, opacity }} className="relative z-10 px-5 pb-28 pt-32 md:pb-36 md:pt-40">
+        <div className="mx-auto w-full max-w-6xl">
           <motion.div
             initial={{ opacity: 0, scale: 0.8, filter: "blur(10px)" }}
             animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
@@ -81,11 +81,11 @@ export function Hero() {
             Grand Millennium · Muscat
           </motion.div>
 
-          <h1 className="overflow-visible font-display text-[clamp(2.75rem,12vw,8rem)] leading-[1.12] font-medium tracking-tight">
+          <h1 className="max-w-full font-display text-[clamp(2.5rem,10vw,7rem)] leading-[1.1] font-medium tracking-tight">
             <TextReveal text="Diba" className="block text-wine" delay={0.4} as="span" />
             <TextReveal
               text="Beauty"
-              className="gradient-text block pr-1 italic"
+              className="gradient-text block pr-[0.08em] italic"
               delay={0.7}
               as="span"
             />
