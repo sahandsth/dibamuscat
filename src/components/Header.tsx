@@ -43,10 +43,10 @@ export function Header() {
       >
         <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-5">
           <a href="#home" className="group flex flex-col">
-            <span className="font-display text-2xl font-semibold tracking-[0.2em] text-wine">
+            <span dir="ltr" className="font-display inline-block text-2xl font-semibold tracking-[0.2em] text-wine [unicode-bidi:isolate]">
               DIBA
             </span>
-            <span className="text-[10px] tracking-[0.35em] text-muted uppercase">
+            <span dir="ltr" className="inline-block text-[10px] tracking-[0.35em] text-muted uppercase [unicode-bidi:isolate]">
               Grand Millennium
             </span>
           </a>

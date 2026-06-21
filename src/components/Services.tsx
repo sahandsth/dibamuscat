@@ -68,7 +68,7 @@ export function Services() {
                       className="mb-2 shrink-0 text-rose md:mb-3"
                       strokeWidth={1.5}
                     />
-                    <h3 className="font-display text-base leading-snug text-wine md:text-xl">
+                    <h3 dir="ltr" className="font-display text-base leading-snug text-wine md:text-xl [unicode-bidi:isolate]">
                       {service.title}
                     </h3>
                     <p className="mt-1 flex-1 text-[11px] leading-relaxed text-muted md:text-sm">

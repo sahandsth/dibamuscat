@@ -8,6 +8,7 @@ type TextRevealProps = {
   delay?: number;
   as?: "h1" | "h2" | "p" | "span";
   splitLetters?: boolean;
+  ltr?: boolean;
 };
 
 export function TextReveal({
@@ -16,12 +17,18 @@ export function TextReveal({
   delay = 0,
   as: Tag = "span",
   splitLetters = true,
+  ltr = false,
 }: TextRevealProps) {
   const letters = text.split("");
+  const directionProps = ltr ? { dir: "ltr" as const } : {};
 
   if (!splitLetters) {
     return (
-      <Tag className={`max-w-full ${className}`} aria-label={text}>
+      <Tag
+        {...directionProps}
+        className={`max-w-full ${ltr ? "[unicode-bidi:isolate] " : ""}${className}`}
+        aria-label={text}
+      >
         <motion.span
           className="inline-block"
           initial={{ opacity: 0, y: 24 }}
@@ -40,7 +47,8 @@ export function TextReveal({
 
   return (
     <Tag
-      className={`max-w-full ${className}`}
+      {...directionProps}
+      className={`max-w-full ${ltr ? "[unicode-bidi:isolate] " : ""}${className}`}
       aria-label={text}
     >
       {letters.map((letter, i) => (

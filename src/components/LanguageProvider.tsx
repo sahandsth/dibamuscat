@@ -16,6 +16,7 @@ import {
   type Dictionary,
   type Locale,
 } from "@/lib/i18n";
+import { withRtlBidi } from "@/lib/bidi";
 
 type LanguageContextValue = {
   locale: Locale;
@@ -68,17 +69,17 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     setHasChosenLocale(true);
   }, []);
 
-  const value = useMemo(
-    () => ({
+  const value = useMemo(() => {
+    const rtl = isRtl(locale);
+    return {
       locale,
-      t: getDictionary(locale),
-      rtl: isRtl(locale),
+      t: withRtlBidi(getDictionary(locale), rtl),
+      rtl,
       ready,
       hasChosenLocale,
       setLocale,
-    }),
-    [locale, ready, hasChosenLocale, setLocale],
-  );
+    };
+  }, [locale, ready, hasChosenLocale, setLocale]);
 
   return (
     <LanguageContext.Provider value={value}>{children}</LanguageContext.Provider>

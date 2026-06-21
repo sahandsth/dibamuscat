@@ -74,8 +74,12 @@ export function Booking() {
               transition={{ repeat: Infinity, duration: 4, ease: "linear" }}
             />
             <div className="relative bg-gradient-to-r from-wine to-rose p-6 text-cream">
-              <h3 className="font-display text-2xl">{site.name}</h3>
-              <p className="mt-1 text-sm text-cream/70">{site.location.short}</p>
+              <h3 dir="ltr" className="font-display text-2xl [unicode-bidi:isolate]">
+                {site.name}
+              </h3>
+              <p dir="ltr" className="mt-1 text-sm text-cream/70 [unicode-bidi:isolate]">
+                {site.location.short}
+              </p>
             </div>
 
             <div className="relative space-y-4 p-6">

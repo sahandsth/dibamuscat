@@ -30,8 +30,10 @@ export function LanguagePicker() {
         animate={{ opacity: 1, y: 0, scale: 1 }}
         transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
       >
-        <p className="font-display text-4xl text-cream md:text-5xl">Diba</p>
-        <p className="mt-2 text-xs tracking-[0.35em] text-rose-light uppercase">
+        <p dir="ltr" className="font-display text-4xl text-cream md:text-5xl [unicode-bidi:isolate]">
+          Diba
+        </p>
+        <p dir="ltr" className="mt-2 text-xs tracking-[0.35em] text-rose-light uppercase [unicode-bidi:isolate]">
           Beauty Lounge
         </p>
 

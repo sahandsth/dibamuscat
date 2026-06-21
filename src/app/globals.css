@@ -156,6 +156,7 @@ body {
   align-items: center;
   justify-content: center;
   width: 100%;
+  direction: ltr;
   padding-bottom: 0.15em;
   font-family: var(--font-display), serif;
   font-size: clamp(3.25rem, min(14vw, 18vh), 9rem);

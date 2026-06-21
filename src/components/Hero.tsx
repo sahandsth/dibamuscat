@@ -83,22 +83,26 @@ export function Hero() {
             >
               <Sparkles size={12} className="text-gold" />
             </motion.span>
-            {t.hero.badge}
+            <span dir="ltr" className="inline-block [unicode-bidi:isolate]">
+              {t.hero.badge}
+            </span>
           </motion.div>
 
-          <h1 className="hero-title w-full max-w-full">
+          <h1 className="hero-title w-full max-w-full" dir="ltr">
             <TextReveal
-              text={t.hero.titleLine1}
+              text="Diba"
               className="hero-title-line text-wine"
               delay={0.4}
               as="span"
+              ltr
             />
             <TextReveal
-              text={t.hero.titleLine2}
+              text="Beauty"
               className="hero-title-line hero-title-accent"
               delay={0.7}
               as="span"
               splitLetters={false}
+              ltr
             />
           </h1>
 
@@ -156,7 +160,9 @@ export function Hero() {
                 transition={{ delay: 1.6 + i * 0.1 }}
               >
                 <p className="font-display text-lg leading-tight text-wine sm:text-2xl">
-                  {stat.value}
+                  <span dir="ltr" className="inline-block [unicode-bidi:isolate]">
+                    {stat.value}
+                  </span>
                 </p>
                 <p className="mt-0.5 text-[10px] tracking-wider text-muted uppercase sm:text-xs">
                   {stat.label}

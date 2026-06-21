@@ -40,8 +40,12 @@ export function About() {
               transition={{ delay: 0.4, duration: 0.6, type: "spring" }}
               whileHover={{ y: -4, rotate: -2 }}
             >
-              <p className="font-display text-3xl text-wine">{t.about.cardTitle}</p>
-              <p className="text-sm text-muted">{t.about.cardSubtitle}</p>
+              <p dir="ltr" className="font-display text-3xl text-wine [unicode-bidi:isolate]">
+                {t.about.cardTitle}
+              </p>
+              <p dir="ltr" className="text-sm text-muted [unicode-bidi:isolate]">
+                {t.about.cardSubtitle}
+              </p>
             </motion.div>
             <motion.div
               className="absolute -top-4 -left-4 h-20 w-20 rounded-full border border-gold/30 bg-gold-light/20 backdrop-blur-sm"

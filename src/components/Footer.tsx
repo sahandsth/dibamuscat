@@ -13,9 +13,11 @@ export function Footer() {
         <div className="flex flex-col items-center gap-8 md:flex-row md:justify-between">
           <div className="text-center md:text-start">
             <p className="font-display text-2xl tracking-[0.2em] text-cream">
-              DIBA
+              <span dir="ltr" className="inline-block [unicode-bidi:isolate]">
+                DIBA
+              </span>
             </p>
-            <p className="mt-1 text-xs tracking-[0.3em] text-rose-light uppercase">
+            <p dir="ltr" className="mt-1 inline-block text-xs tracking-[0.3em] text-rose-light uppercase [unicode-bidi:isolate]">
               {site.tagline}
             </p>
           </div>

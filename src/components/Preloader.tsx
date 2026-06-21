@@ -29,6 +29,7 @@ export function Preloader() {
             animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
             transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
             className="relative text-center"
+            dir="ltr"
           >
             {"DIBA".split("").map((letter, i) => (
               <motion.span

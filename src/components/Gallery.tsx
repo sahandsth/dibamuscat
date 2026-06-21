@@ -71,8 +71,12 @@ function PortfolioCard({
         <PortfolioImage src={item.src} alt={item.alt} tag={item.tag} />
         <div className="absolute inset-0 bg-gradient-to-t from-wine/85 via-wine/25 to-transparent" />
         <div className="absolute inset-x-0 bottom-0 p-4">
-          <p className="font-display text-lg text-cream md:text-xl">{item.tag}</p>
-          <p className="mt-0.5 text-xs text-cream/75 md:text-sm">{item.caption}</p>
+          <p dir="ltr" className="font-display text-lg text-cream md:text-xl [unicode-bidi:isolate]">
+            {item.tag}
+          </p>
+          <p dir="ltr" className="mt-0.5 text-xs text-cream/75 md:text-sm [unicode-bidi:isolate]">
+            {item.caption}
+          </p>
         </div>
       </div>
     </motion.article>
@@ -105,7 +109,8 @@ export function Gallery() {
             {t.gallery.categories.map((cat) => (
               <span
                 key={cat}
-                className="rounded-full border border-wine/10 bg-white/60 px-3 py-1 text-[11px] tracking-wide text-wine/80 uppercase"
+                dir="ltr"
+                className="inline-block rounded-full border border-wine/10 bg-white/60 px-3 py-1 text-[11px] tracking-wide text-wine/80 uppercase [unicode-bidi:isolate]"
               >
                 {cat}
               </span>

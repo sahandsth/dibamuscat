@@ -48,8 +48,10 @@ export function Testimonials() {
                 </motion.div>
                 <p className="relative leading-relaxed text-cream/85">{review.text}</p>
                 <div className="relative mt-6 border-t border-cream/10 pt-4">
-                  <p className="font-display text-lg">{review.name}</p>
-                  <p className="text-xs tracking-wider text-rose-light uppercase">
+                  <p dir="ltr" className="font-display text-lg [unicode-bidi:isolate]">
+                    {review.name}
+                  </p>
+                  <p dir="ltr" className="text-xs tracking-wider text-rose-light uppercase [unicode-bidi:isolate]">
                     {review.service}
                   </p>
                 </div>

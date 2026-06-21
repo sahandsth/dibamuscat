@@ -22,7 +22,7 @@ export function Marquee() {
   ));
 
   return (
-    <div className="group overflow-hidden border-y border-wine/10 bg-blush/40 py-5">
+    <div className="group overflow-hidden border-y border-wine/10 bg-blush/40 py-5" dir="ltr">
       <div className="flex w-max animate-marquee group-hover:[animation-play-state:paused]">
         {row}
         {row}
